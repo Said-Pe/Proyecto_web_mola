@@ -53,7 +53,7 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-user"></i> Hola, {{ user.first_name }}
+                        <i class="fas fa-user"></i> Hola, {{ user.get_full_name|default:user.username }}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'perfil' %}">Mi Perfil</a></li>

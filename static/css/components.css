@@ -1,0 +1,497 @@
+/* ============================================
+   COMPONENTES ESPECIALES GUNA
+   ============================================ */
+
+/* Decorador de Esquina Guna */
+.guna-corner-decorator {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--guna-red), var(--guna-orange));
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    opacity: 0.15;
+}
+
+.guna-corner-decorator.top-left {
+    top: 0;
+    left: 0;
+}
+
+.guna-corner-decorator.top-right {
+    top: 0;
+    right: 0;
+    transform: rotate(90deg);
+}
+
+.guna-corner-decorator.bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.guna-corner-decorator.bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+/* ============================================
+   LOADING SPINNER GUNA
+   ============================================ */
+.guna-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--gray-200);
+    border-top-color: var(--guna-red);
+    border-right-color: var(--guna-orange);
+    border-bottom-color: var(--guna-yellow);
+    border-left-color: var(--guna-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   BREADCRUMBS GUNA
+   ============================================ */
+.breadcrumb {
+    background: transparent;
+    padding: 1rem 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: var(--guna-orange);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.breadcrumb-item a {
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.breadcrumb-item a:hover {
+    color: var(--guna-red);
+}
+
+.breadcrumb-item.active {
+    color: var(--gray-800);
+    font-weight: 600;
+}
+
+/* ============================================
+   PAGINATION GUNA
+   ============================================ */
+.pagination {
+    gap: 0.5rem;
+}
+
+.page-item .page-link {
+    border: 2px solid var(--gray-300);
+    color: var(--gray-700);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 1rem;
+    transition: var(--transition-fast);
+    font-weight: 600;
+}
+
+.page-item .page-link:hover {
+    background: linear-gradient(135deg, var(--guna-red), var(--guna-orange));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, var(--guna-red), var(--guna-orange));
+    border-color: transparent;
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    background: var(--gray-200);
+    border-color: var(--gray-300);
+    color: var(--gray-500);
+}
+
+/* ============================================
+   MODAL MEJORADO
+   ============================================ */
+.modal-content {
+    border: none;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--gray-800), var(--gray-700));
+    color: white;
+    border-bottom: 3px solid var(--guna-yellow);
+    padding: 1.5rem;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 1.5rem;
+}
+
+/* ============================================
+   TOOLTIP PERSONALIZADO
+   ============================================ */
+.tooltip-inner {
+    background: linear-gradient(135deg, var(--guna-black), var(--gray-800));
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: var(--guna-black);
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: var(--guna-black);
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: var(--guna-black);
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: var(--guna-black);
+}
+
+/* ============================================
+   TAGS/BADGES GUNA
+   ============================================ */
+.badge-guna {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge-guna.badge-tradicional {
+    background: var(--guna-red-light);
+    color: var(--guna-red);
+}
+
+.badge-guna.badge-moderna {
+    background: var(--guna-blue-light);
+    color: var(--guna-blue);
+}
+
+.badge-guna.badge-personalizada {
+    background: var(--guna-purple-light);
+    color: var(--guna-purple);
+}
+
+/* ============================================
+   PRICE DISPLAY
+   ============================================ */
+.price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.price-original {
+    font-size: 1.1rem;
+    color: var(--gray-500);
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.price-current {
+    font-size: 1.75rem;
+    color: var(--guna-red);
+    font-weight: 800;
+}
+
+.price-discount-badge {
+    background: linear-gradient(135deg, var(--guna-red), var(--guna-orange));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   PRODUCT FILTERS
+   ============================================ */
+.filter-section {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+}
+
+.filter-section h6 {
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--guna-yellow);
+}
+
+.form-check-input:checked {
+    background-color: var(--guna-red);
+    border-color: var(--guna-red);
+}
+
+.form-check-input:focus {
+    border-color: var(--guna-orange);
+    box-shadow: 0 0 0 0.25rem rgba(211, 47, 47, 0.25);
+}
+
+/* ============================================
+   IMAGE GALLERY
+   ============================================ */
+.product-image-gallery {
+    display: grid;
+    gap: 1rem;
+}
+
+.main-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.main-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: var(--transition-slow);
+}
+
+.main-image img:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+}
+
+.thumbnail {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.thumbnail:hover {
+    border-color: var(--guna-orange);
+}
+
+.thumbnail.active {
+    border-color: var(--guna-red);
+    box-shadow: var(--shadow-md);
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* ============================================
+   RATING STARS
+   ============================================ */
+.rating-stars {
+    display: inline-flex;
+    gap: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.rating-stars .fa-star {
+    color: var(--guna-yellow);
+}
+
+.rating-stars .fa-star.empty {
+    color: var(--gray-300);
+}
+
+/* ============================================
+   STOCK INDICATOR
+   ============================================ */
+.stock-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.stock-indicator.in-stock {
+    background: var(--guna-green-light);
+    color: var(--guna-green);
+}
+
+.stock-indicator.low-stock {
+    background: var(--guna-yellow-light);
+    color: #856404;
+}
+
+.stock-indicator.out-of-stock {
+    background: var(--guna-red-light);
+    color: var(--guna-red);
+}
+
+.stock-indicator i {
+    font-size: 1rem;
+}
+
+/* ============================================
+   CART SUMMARY
+   ============================================ */
+.cart-summary {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 20px;
+}
+
+.cart-summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.cart-summary-item:last-child {
+    border-bottom: none;
+}
+
+.cart-summary-total {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--guna-red);
+    padding-top: 1rem;
+    border-top: 2px solid var(--guna-yellow);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    color: var(--gray-400);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   SEARCH BAR
+   ============================================ */
+.search-bar {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar input {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    height: 3.5rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-xl);
+    font-size: 1.1rem;
+}
+
+.search-bar input:focus {
+    border-color: var(--guna-orange);
+    box-shadow: 0 0 0 4px var(--guna-orange-light);
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-500);
+    font-size: 1.25rem;
+}
+
+.search-bar .clear-btn {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.search-bar .clear-btn:hover {
+    color: var(--guna-red);
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+@media (max-width: 768px) {
+    .product-card .card-img-top {
+        height: 200px;
+    }
+    
+    .main-image img {
+        height: 300px;
+    }
+    
+    .cart-summary {
+        position: relative;
+        top: 0;
+    }
+    
+    .filter-section {
+        margin-bottom: 1rem;
+    }
+}

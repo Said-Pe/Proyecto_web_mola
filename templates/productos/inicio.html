@@ -1,32 +1,88 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Inicio - Molas Guna | Arte Tradicional Panameño{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section text-center">
+
+<!-- Hero Section con patrón geométrico Guna -->
+<section class="hero-section text-center fade-in-up">
     <div class="container">
-        <h1 class="display-4 fw-bold">Molas Guna de Panamá</h1>
-        <p class="lead">Arte tradicional hecho a mano por artesanos Gunas</p>
-        <a href="{% url 'lista_productos' %}" class="btn btn-primary btn-lg">Explorar Colección</a>
+        <h1 class="display-3 fw-bold mb-3">Molas Guna de Panamá</h1>
+        <p class="lead mb-4">Arte tradicional hecho a mano por artesanos Gunas</p>
+        <p class="mb-5">Cada mola cuenta una historia única de nuestra cultura ancestral</p>
+        <a href="{% url 'lista_productos' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-shopping-bag me-2"></i>
+            Explorar Colección
+        </a>
+    </div>
+</section>
+
+<!-- Sección de Características -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-hands fa-3x" style="color: var(--guna-red);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">100% Hecho a Mano</h4>
+                    <p class="text-muted">Cada mola es única y elaborada con técnicas tradicionales transmitidas de generación en generación.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-heart fa-3x" style="color: var(--guna-orange);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Apoyo a Artesanos</h4>
+                    <p class="text-muted">Tu compra apoya directamente a las comunidades Guna y preserva su arte ancestral.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-shield-alt fa-3x" style="color: var(--guna-yellow);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Autenticidad Garantizada</h4>
+                    <p class="text-muted">Todas nuestras molas son auténticas y vienen directamente de las comunidades Guna.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- Categorías Destacadas -->
-<section class="py-5">
+<section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-5">Nuestras Categorías</h2>
-        <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Explora Nuestras Categorías</h2>
+            <p class="text-muted">Descubre la diversidad del arte Guna</p>
+        </div>
+        
+        <div class="row g-4">
             {% for categoria in categorias_destacadas %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="{{ categoria.imagen.url }}" class="card-img-top" alt="{{ categoria.nombre }}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ categoria.nombre }}</h5>
-                        <a href="{% url 'productos_por_categoria' categoria.slug %}" class="btn btn-outline-primary">
+            <div class="col-md-4">
+                <div class="card categoria-card h-100">
+                    {% if categoria.imagen %}
+                        <img src="{{ categoria.imagen.url }}" class="card-img-top" alt="{{ categoria.nombre }}">
+                    {% else %}
+                        <img src="{% static 'images/placeholder-categoria.jpg' %}" class="card-img-top" alt="Imagen no disponible"> #corregir la dirreción
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3">{{ categoria.nombre }}</h5>
+                        <p class="text-white-50 mb-3">{{ categoria.descripcion|default:"Descubre nuestra colección" }}</p>
+                        <a href="{% url 'productos_por_categoria' categoria.slug %}" class="btn btn-outline-light">
                             Ver Productos
+                            <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No hay categorías disponibles en este momento.</p>
             </div>
             {% endfor %}
         </div>
@@ -34,42 +90,162 @@
 </section>
 
 <!-- Productos Destacados -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-white">
     <div class="container">
-        <h2 class="text-center mb-5">Productos Destacados</h2>
-        <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Productos Destacados</h2>
+            <p class="text-muted">Nuestras molas más populares y especiales</p>
+        </div>
+        
+        <div class="row g-4">
             {% for producto in productos_destacados %}
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6">
                 <div class="card product-card h-100">
                     {% if producto.tiene_descuento %}
-                    <span class="badge bg-danger badge-descuento">-{{ producto.porcentaje_descuento }}%</span>
+                    <span class="badge-descuento">
+                        <i class="fas fa-tag me-1"></i>
+                        -{{ producto.porcentaje_descuento }}%
+                    </span>
                     {% endif %}
                     
-                    <img src="{{ producto.imagen_principal.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    <img src="{{ producto.imagen_principal.url }}" 
+                         class="card-img-top" 
+                         alt="{{ producto.nombre }}"
+                         loading="lazy">
+                    
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text flex-grow-1">{{ producto.descripcion|truncatewords:15 }}</p>
+                        <p class="card-text text-muted small flex-grow-1">
+                            {{ producto.descripcion|truncatewords:15 }}
+                        </p>
                         
                         <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    {% if producto.tiene_descuento %}
-                                    <span class="text-muted text-decoration-line-through">${{ producto.precio_original }}</span>
-                                    {% endif %}
-                                    <span class="h5 text-primary">${{ producto.precio }}</span>
+                            <div class="mb-3">
+                                {% if producto.tiene_descuento %}
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="text-muted text-decoration-line-through small">
+                                        ${{ producto.precio_original }}
+                                    </span>
+                                    <span class="h5 text-primary mb-0 fw-bold">
+                                        ${{ producto.precio }}
+                                    </span>
                                 </div>
-                                <a href="{% url 'detalle_producto' producto.slug %}" class="btn btn-outline-primary btn-sm">Ver</a>
+                                {% else %}
+                                <span class="h5 text-primary mb-0 fw-bold">
+                                    ${{ producto.precio }}
+                                </span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'detalle_producto' producto.slug %}" 
+                                   class="btn btn-outline-primary flex-grow-1">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Ver
+                                </a>
+                                <form method="post" action="{% url 'agregar_al_carrito' producto.id %}" class="flex-grow-1">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="cantidad" value="1">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No hay productos destacados disponibles en este momento.
+                </div>
+            </div>
             {% endfor %}
         </div>
         
-        <div class="text-center mt-4">
-            <a href="{% url 'lista_productos' %}" class="btn btn-primary">Ver Todos los Productos</a>
+        <div class="text-center mt-5">
+            <a href="{% url 'lista_productos' %}" class="btn btn-primary btn-lg">
+                Ver Todos los Productos
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
         </div>
     </div>
 </section>
+
+<!-- Sección Sobre la Cultura Guna -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-4">Arte y Tradición Guna</h2>
+                <p class="lead mb-4">
+                    Las molas son textiles tradicionales creados por el pueblo Guna de Panamá, 
+                    reconocidos mundialmente por su belleza y complejidad técnica.
+                </p>
+                <p class="text-muted mb-4">
+                    Cada mola es una obra de arte única que refleja la cosmovisión y 
+                    tradiciones del pueblo Guna. Los diseños geométricos y coloridos 
+                    representan elementos de la naturaleza, la mitología y la vida cotidiana.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Técnica de costura de capas (reverse appliqué)
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Diseños transmitidos de generación en generación
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Patrimonio cultural de Panamá
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative">
+                    <div class="p-4 bg-white rounded shadow-lg">
+                        <div class="ratio ratio-4x3">
+                            <img src="{% static 'images/cultura-guna.jpg' %}" 
+                                 class="rounded" 
+                                 alt="Cultura Guna"
+                                 style="object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/600x450/667eea/ffffff?text=Arte+Guna'">
+                        </div>
+                    </div>
+                    <div class="position-absolute" style="top: -20px; right: -20px; z-index: -1;">
+                        <div style="width: 150px; height: 150px; background: linear-gradient(135deg, var(--guna-yellow), var(--guna-orange)); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; opacity: 0.3;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Final -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="fw-bold mb-4">¿Listo para Llevar Arte Guna a tu Hogar?</h2>
+                <p class="lead text-muted mb-4">
+                    Explora nuestra colección completa y encuentra la mola perfecta para ti o como regalo especial.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'lista_productos' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-shopping-bag me-2"></i>
+                        Ver Catálogo Completo
+                    </a>
+                    <a href="{% url 'buscar_productos' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-search me-2"></i>
+                        Buscar Productos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

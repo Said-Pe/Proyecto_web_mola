@@ -27,8 +27,10 @@ def checkout(request):
             'subtotal': subtotal
         })
     
+    from decimal import Decimal
+
     # Agregar ITBMS (7% Panamá)
-    itbms = total * 0.07
+    itbms = total * Decimal('0.07')
     total_con_impuestos = total + itbms
     
     if request.method == 'POST':

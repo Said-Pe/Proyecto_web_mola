@@ -27,3 +27,9 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+
+# Archivos estáticos recolectados por collectstatic
+/staticfiles/
+
+# Archivos de medios subidos por los usuarios
+/media/
