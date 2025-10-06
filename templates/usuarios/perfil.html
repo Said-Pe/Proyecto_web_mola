@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Perfil - Molas Guna{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="perfil-container">
+    <div class="container">
+        <h1>Mi Perfil, acá va a aparecer cosas relacionadas a tu perfil.</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+
+<script src="{% static 'js/perfil.js' %}"></script>
+{% endblock %}
